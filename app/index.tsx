@@ -1,28 +1,28 @@
-import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+// index.tsx
+import 'react-native-gesture-handler';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import HomeScreen from './src/screens/home';
+import Registrar from './src/screens/register';
+// You can create additional screens: RegisterScreen, RescanScreen, AssignScreen
+
+export type RootStackParamList = {
+    Home: undefined;
+    Register: undefined;
+    Rescan: undefined;
+    Assign: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function Index() {
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>
-                Inicio de la APP Rodanmuro
-            </Text>
-        </View>
-    )
-}
+        <Stack.Navigator initialRouteName='Home'>
+            <Stack.Screen name='Home' component={HomeScreen} />
+            <Stack.Screen name='Register' component={Registrar} />
+        </Stack.Navigator>
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#f5f5f5',
-        padding: 24,
-        justifyContent: 'center',
-      },
-      title: {
-        fontSize: 28,
-        marginBottom: 32,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        color: '#333',
-      },
-})
+    );
+}
